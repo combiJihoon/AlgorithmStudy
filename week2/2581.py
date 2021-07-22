@@ -1,5 +1,3 @@
-'''시간초과'''
-
 import sys
 
 input = sys.stdin.readline
@@ -34,10 +32,3 @@ else:
 
 # 약수의 개수 구하기
 # 약수 개수 2개면 소수
-
-# import sys
-
-# input = sys.stdin.readline
-
-# m = int(input())
-# n = int(input())
