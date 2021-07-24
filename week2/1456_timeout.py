@@ -4,17 +4,17 @@ import math
 input = sys.stdin.readline
 
 
-def isPrime(num):
-    is_prime = False
-    cnt = 0
-    for i in range(2, num+1):
-        if num % i == 0:
-            cnt += 1
-            if cnt > 1:
-                break
-    if cnt == 1:  # i가 소수
-        is_prime = True  # 소수임을 표시
-        return is_prime
+# def isPrime(num):
+#     is_prime = False
+#     cnt = 0
+#     for i in range(2, num+1):
+#         if num % i == 0:
+#             cnt += 1
+#             if cnt > 1:
+#                 break
+#     if cnt == 1:  # i가 소수
+#         is_prime = True  # 소수임을 표시
+#         return is_prime
 
 
 # def is_almostPrime(a, b):
@@ -36,18 +36,29 @@ def isPrime(num):
 #     return result
 
 def is_almostPrime(a, b):
+    max_num = int(1e7)
+    # 소수 체크
+    prime_list = [True] * (max_num+1)
+    for i in range(2, len(prime_list)):
+        if prime_list[i]:
+            for j in range(2, (max_num//i)+1):
+                if prime_list[i * j]:
+                    prime_list[i * j] = False
+
     result = 0
-    # max_num = int(1e7)
-    end = int(math.sqrt(b))
-    for i in range(2, end+1):
-        if isPrime(i):
-            j = 2
+    i = 2
+    for i in range(2, b+1):
+        if i ** 2 > b:
+            break
+        # 소수일 때 n제곱이 a, b 사이인지 확인
+        if prime_list[i]:
+            n = 2
             while True:
-                if a <= i ** j <= b:
+                if a <= i ** n <= b:
                     result += 1
-                    j += 1
-                else:
+                if i ** n > b:
                     break
+                n += 1
 
     return result
 
@@ -59,3 +70,7 @@ print(is_almostPrime(a, b))
 # 1 <= x <= 1000
 # 소수: 2, 3, 5, 7, ...
 #      4, 9, 25, 49, ....
+# 소수가 아닌 것을 구하면 된다...
+
+# 10^7 까지 소수인 지를 구한 다음
+# 제곱한 것의 범위가 a <= x <= b인 지 확인
