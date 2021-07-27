@@ -1,7 +1,4 @@
 import sys
-import math
-
-input = sys.stdin.readline
 
 
 # def isPrime(num):
@@ -35,37 +32,35 @@ input = sys.stdin.readline
 
 #     return result
 
-def is_almostPrime(a, b):
-    max_num = int(1e7)
-    # 소수 체크
-    prime_list = [True] * (max_num+1)
-    for i in range(2, len(prime_list)):
-        if prime_list[i]:
-            for j in range(2, (max_num//i)+1):
-                if prime_list[i * j]:
-                    prime_list[i * j] = False
+# def is_almostPrime(a, b):
+#     max_num = int(1e7)
+#     # 소수 체크
+#     prime_list = [True] * (max_num+1)
+#     for i in range(2, len(prime_list)):
+#         if prime_list[i]:
+#             for j in range(2, (max_num//i)+1):
+#                 if prime_list[i * j]:
+#                     prime_list[i * j] = False
 
-    result = 0
-    i = 2
-    for i in range(2, b+1):
-        if i ** 2 > b:
-            break
-        # 소수일 때 n제곱이 a, b 사이인지 확인
-        if prime_list[i]:
-            n = 2
-            while True:
-                if a <= i ** n <= b:
-                    result += 1
-                if i ** n > b:
-                    break
-                n += 1
+#     result = 0
+#     i = 2
+#     for i in range(2, b+1):
+#         if i ** 2 > b:
+#             break
+#         # 소수일 때 n제곱이 a, b 사이인지 확인
+#         if prime_list[i]:
+#             n = 2
+#             while True:
+#                 if a <= i ** n <= b:
+#                     result += 1
+#                 if i ** n > b:
+#                     break
+#                 n += 1
 
-    return result
+#     return result
 
+# def is_almostPrime(a, b):
 
-a, b = map(int, input().split())
-
-print(is_almostPrime(a, b))
 
 # 1 <= x <= 1000
 # 소수: 2, 3, 5, 7, ...
@@ -74,3 +69,42 @@ print(is_almostPrime(a, b))
 
 # 10^7 까지 소수인 지를 구한 다음
 # 제곱한 것의 범위가 a <= x <= b인 지 확인
+
+# 소수의 배수인 수를 구하면 된다.
+# A <= B <= 10^14
+# -> 소수는 10^7 보다 작음
+# -> 10^7까지 소수를 구하고 제곱한 것이 안에 속하는지 확인
+input = sys.stdin.readline
+
+a, b = map(int, input().split())
+
+# 소수 찾기
+isprime_list = [True] * (int(1e7)+1)
+prime_list = [0] * (int(1e7)+1)
+for i in range(2, len(prime_list)):
+    if i > b:
+        break
+    else:
+        if isprime_list[i]:
+            prime_list.append(i)
+            j = i
+            while j < len(prime_list):
+                isprime_list[j] = False
+                j += i
+
+# 거의 소수 찾기
+
+result = 0
+for num in prime_list:
+    j = 2
+    while True:
+        num **= j
+        if a <= num:
+            if num <= b:
+                result += 1
+            else:
+                break
+        else:
+            j += 1
+
+print(result)

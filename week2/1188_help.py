@@ -2,14 +2,6 @@ import sys
 
 input = sys.stdin.readline
 
-'''
-(cut+1) * sausages = people * n
-즉, cut+1과 people 최소공배수가 
-editors의 배수면 된다.
--> sausages와 people의 최소공배수를 만들고
--> 이에 해당하는 (cut+1) 구하면 된다.
-'''
-
 sausages, people = map(int, input().split())
 
 
