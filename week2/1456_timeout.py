@@ -1,5 +1,5 @@
 import sys
-
+import math
 
 # def isPrime(num):
 #     is_prime = False
@@ -79,18 +79,15 @@ input = sys.stdin.readline
 a, b = map(int, input().split())
 
 # 소수 찾기
-isprime_list = [True] * (int(1e7)+1)
-prime_list = [0] * (int(1e7)+1)
+isprime_list = [True] * (math.sqrt(b)+1)
+prime_list = []
 for i in range(2, len(prime_list)):
-    if i > b:
-        break
-    else:
-        if isprime_list[i]:
-            prime_list.append(i)
-            j = i
-            while j < len(prime_list):
-                isprime_list[j] = False
-                j += i
+    if isprime_list[i]:
+        prime_list.append(i)
+        j = i
+        while j < len(prime_list):
+            isprime_list[j] = False
+            j += i
 
 # 거의 소수 찾기
 
