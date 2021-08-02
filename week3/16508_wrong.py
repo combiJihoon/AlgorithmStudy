@@ -14,14 +14,19 @@ input = sys.stdin.readline
 target = str(input()).strip()
 n = int(input())
 prices = []
-titles = []
+tmp_titles = []
 for _ in range(n):
     std = 0
     x, y = input().split()
     prices.append(int(x))
-    titles.append(list(set(str(y))))
+    tmp_titles.append(list((str(y))))
 
-# print(prices)
+
+titles = []
+for tmp in tmp_titles:
+    titles.append(set(tmp))
+
+
 # [ [],  [],  [] ]
 divided_letters = [[] for i in range(len(target))]
 for i in range(len(titles)):
@@ -29,23 +34,28 @@ for i in range(len(titles)):
         if target[j] in titles[i]:
             divided_letters[j].append(i)
 
-# print(divided_letters)
-
 
 pd = []
 pd += product(*divided_letters)
 
+
+is_impossible = False
 min_price = int(1e9)
 for case in pd:
+    for i in case:
+        if len(case) > len(tmp_titles[i]):
+            is_impossible = True
+            break
+    if is_impossible:
+        break
     case = list(set(case))
     tmp = 0
     for i in case:
         tmp += prices[i]
     min_price = min(min_price, tmp)
-    # print(case, min_price)
 
 
-if min_price == int(1e9):
+if min_price == int(1e9) or is_impossible:
     print(-1)
 else:
     print(min_price)
