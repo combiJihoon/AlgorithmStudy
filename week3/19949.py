@@ -40,3 +40,37 @@ def dfs():
 
 dfs()
 print(result)
+
+
+'''
+백트래킹 다른 풀이
+
+
+
+ans = [int(i) for i in input().split()]
+dp = [
+    [[[-1 for s in range(11)] for p2 in range(6)] for p1 in range(6)] for n in range(11)
+]
+
+def backTracking(n, p1, p2, score):
+    if dp[n][p1][p2][score] != -1:
+        return dp[n][p1][p2][score]
+
+    if n == 10:
+        if score >= 5:
+            return 1
+        else:
+            return 0
+
+    res = 0
+    for i in range(1, 6):
+        if p1 == p2 and p2 == i:
+            pass
+        elif ans[n] == i:
+            res += backTracking(n + 1, p2, i, score + 1)
+        else:
+            res += backTracking(n + 1, p2, i, score)
+
+    dp[n][p1][p2][score] = res
+    return res
+'''

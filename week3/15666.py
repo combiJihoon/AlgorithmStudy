@@ -3,9 +3,7 @@ import sys
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
-num_list = set(map(int, input().split()))
-num_list = list(num_list)
-num_list.sort()
+num_list = list(set(map(int, input().split()))).sort()
 
 stack = []
 result = dict()

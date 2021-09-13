@@ -23,4 +23,5 @@ def dfs():
             stack.pop()
 
 
+# 인자로 last를 넣으면 크기에 따라 stack에 쌓인다~!
 dfs()

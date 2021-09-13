@@ -17,6 +17,7 @@ def dfs():
         if i not in stack:
             stack.append(i)
             dfs()
+            # len(stack) == m 되는 동안 pop이 m번 쌓인다~
             stack.pop()
 
 

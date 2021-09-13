@@ -55,7 +55,4 @@ for case in pd:
     min_price = min(min_price, tmp)
 
 
-if min_price == int(1e9) or is_impossible:
-    print(-1)
-else:
-    print(min_price)
+print(-1 if min_price == int(1e9) or is_impossible else min_price)

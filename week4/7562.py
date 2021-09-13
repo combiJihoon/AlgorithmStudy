@@ -48,6 +48,8 @@ for _ in range(tests):
 
 '''
 max_recursion_depth 오류 나옴
+# max_recursion_depth 해결하는 코드 쓰면 됨
+# sys.setrecursionlimit(10000)
 
 def dfs(x, y, chess_arr):
     moves = [
