@@ -35,3 +35,31 @@ for i in range(1, len(meetings)):
         start = meetings[i][0]
         end = meetings[i][1]
 print(cnt)
+
+'''
+다른 풀이
+
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+n = int(input())
+meetings = sorted([tuple(map(int, input().split()))
+                  for _ in range(n)], key=lambda x: (x[1], x[0]))
+if len(meetings) == 1:
+    print(1)
+else:
+    q = deque()
+    for i in meetings:
+        q.append(i)
+
+    x = q.popleft()
+    cnt = 1
+
+    while q:
+        y = q.popleft()
+        if x[1] <= y[0]:
+            cnt += 1
+            x = y
+    print(cnt)
+'''
