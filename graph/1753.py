@@ -27,7 +27,7 @@ def dijkstra(x):
         for new_val, nxt_node in arr[now]:
             nxt_val = val + new_val
             if nxt_val < dp[nxt_node]:
-                dp[nxt_node] = nxt_val
+                dp[nxt_node] = nxt_val  # 갱신
                 heapq.heappush(heap, (nxt_val, nxt_node))
 
 
