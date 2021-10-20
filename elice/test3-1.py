@@ -4,7 +4,7 @@ input = sys.stdin.readline
 n, h = map(int, input().split())
 arr = sorted([list(map(int, input().split())) for _ in range(n)])
 
-stop, cnt = 0, 0
+stop, cnt = -1, 0
 for x, s, k in arr:
     if s > h:
         if k == 3:
@@ -12,7 +12,5 @@ for x, s, k in arr:
             break
         if k == 1:
             cnt += 1
-else:
-    stop = -1
 
 print(stop, cnt)
